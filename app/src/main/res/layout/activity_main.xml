@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_green"
+    android:orientation="vertical"
+    tools:context="com.cjp.os_china.ui.Main.MainActivity">
+
+    <FrameLayout
+        android:id="@+id/contains"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"></FrameLayout>
+
+    <fragment
+        class="com.cjp.os_china.ui.Main.NavFragment"
+        android:layout_width="match_parent"
+        android:layout_height="48dp" />
+</LinearLayout>
