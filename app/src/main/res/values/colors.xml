@@ -8,4 +8,6 @@
     <color name="user_info_message_notice">#E35B5A</color>
     <color name="main_green">#24cf5f</color>
     <color name="list_divider_color">#DADADA</color>
+    <color name="actionbar_background">@color/main_green</color>
+    <color name="project_listitem_someinfo">#b6b6b6</color>
 </resources>
