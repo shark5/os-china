@@ -9,7 +9,7 @@
         android:id="@+id/tab_nav"
         android:layout_width="match_parent"
         android:layout_height="32dp"
-        android:background="#F6F6F6"
+        android:background="@color/background"
         app:tabGravity="fill"
         app:tabIndicatorColor="@color/actionbar_background"
         app:tabMode="fixed"
@@ -19,7 +19,7 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/base_viewPager"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent" />
-
+        android:layout_height="match_parent"
+        android:background="@color/background" />
 
 </LinearLayout>

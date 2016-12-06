@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.cjp.os_china.R;
-import com.cjp.os_china.ui.Main.MainActivity;
+import com.cjp.os_china.ui.main.MainActivity;
 
 public class SplashActivity extends Activity {
 

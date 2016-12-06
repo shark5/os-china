@@ -4,7 +4,7 @@
     android:layout_height="48dp"
     android:background="@android:color/white"
     android:orientation="vertical"
-    tools:context="com.cjp.os_china.ui.Main.NavFragment">
+    tools:context="com.cjp.os_china.ui.main.NavFragment">
 
     <View
         android:layout_width="match_parent"
@@ -16,14 +16,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <com.cjp.os_china.ui.Main.NavigationButton
+        <com.cjp.os_china.ui.main.NavigationButton
             android:id="@+id/nav_item_news"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
 
-        <com.cjp.os_china.ui.Main.NavigationButton
+        <com.cjp.os_china.ui.main.NavigationButton
             android:id="@+id/nav_item_tweet"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -40,13 +40,13 @@
             android:scaleType="centerInside"
             android:src="@drawable/ic_nav_add_selector" />
 
-        <com.cjp.os_china.ui.Main.NavigationButton
+        <com.cjp.os_china.ui.main.NavigationButton
             android:id="@+id/nav_item_explore"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
-        <com.cjp.os_china.ui.Main.NavigationButton
+        <com.cjp.os_china.ui.main.NavigationButton
             android:id="@+id/nav_item_me"
             android:layout_width="0dp"
             android:layout_height="match_parent"

@@ -48,9 +48,7 @@ public abstract class BaseFragment extends Fragment {
     protected void initViews(View view) {
     }
 
-    protected int getLayoutResId() {
-        return 0;
-    }
+    abstract  protected int getLayoutResId();
 
     protected void onPreBindViews(View root) {
     }

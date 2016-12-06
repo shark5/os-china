@@ -8,6 +8,8 @@
     <string name="main_tab_name_my">我的</string>
     <string name="main_tab_name_explore">发现</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="information">资讯</string>
+    <string name="blog">博客</string>
+    <string name="answer">问答</string>
+    <string name="activity">活动</string>
 </resources>

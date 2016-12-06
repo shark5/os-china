@@ -1,10 +1,14 @@
-package com.cjp.os_china.ui.Main;
+package com.cjp.os_china.ui.main;
 
 import android.view.View;
 import android.widget.ImageView;
 
 import com.cjp.os_china.R;
+import com.cjp.os_china.base.AppDefs;
 import com.cjp.os_china.base.BaseFragment;
+import com.cjp.os_china.event.ActionEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -37,11 +41,13 @@ public class NavFragment extends BaseFragment {
         return R.layout.fragment_nav;
     }
 
-    protected void initViews() {
+    protected void initViews(View view) {
         mNewsBtn.init(R.drawable.tab_icon_new, R.string.main_tab_name_news);
         mTweetBtn.init(R.drawable.tab_icon_tweet, R.string.main_tab_name_tweet);
         mExploreBtn.init(R.drawable.tab_icon_explore, R.string.main_tab_name_explore);
         mMeBtn.init(R.drawable.tab_icon_me, R.string.main_tab_name_my);
+        mNewsBtn.setSelected(true);
+        mSelectedBtn = mNewsBtn;
     }
 
     @OnClick({R.id.nav_item_news, R.id.nav_item_tweet, R.id.nav_item_explore, R.id.nav_item_me})
@@ -62,14 +68,20 @@ public class NavFragment extends BaseFragment {
             ((NavigationButton) mSelectedBtn).setSelected(false);
         }
         mSelectedBtn = v;
+        int which = 0;
         if (v == mNewsBtn) {
             mNewsBtn.setSelected(true);
+            which = AppDefs.MAIN_ACTIVITY_NAVIGATE_TO_INFORMATION;
         } else if (v == mTweetBtn) {
             mTweetBtn.setSelected(true);
+            which = AppDefs.MAIN_ACTIVITY_NAVIGATE_TO_BLOG;
         } else if (v == mExploreBtn) {
             mExploreBtn.setSelected(true);
+            which = AppDefs.MAIN_ACTIVITY_NAVIGATE_TO_ANSWER;
         } else if (v == mMeBtn) {
             mMeBtn.setSelected(true);
+            which = AppDefs.MAIN_ACTIVITY_NAVIGATE_TO_ACTIVTTY;
         }
+        EventBus.getDefault().post(new ActionEvent(which, ActionEvent.EVENT_MAIN_ACTIVITY_NAVIGATE_TO));
     }
 }

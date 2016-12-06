@@ -44,7 +44,7 @@ public abstract class BaseTitleFragment extends BaseFragment {
     }
 
     protected void setTitle(int resId) {
-        if (mTitleTv != null) {
+        if (mTitleTv != null && resId > 0) {
             mTitleTv.setText(getString(resId));
         }
     }
@@ -63,7 +63,23 @@ public abstract class BaseTitleFragment extends BaseFragment {
         }
     }
 
-    protected int getContentLayoutId() {
+    abstract protected int getContentLayoutId();
+
+    abstract protected int getTitleRes();
+
+    protected int getRightIconRes() {
         return 0;
+    }
+
+    protected int getLeftIconRes() {
+        return 0;
+    }
+
+    @Override
+    protected void initViews(View view) {
+        super.initViews(view);
+        setTitle(getTitleRes());
+        setRightImageView(getRightIconRes());
+        setLeftImageView(getRightIconRes());
     }
 }

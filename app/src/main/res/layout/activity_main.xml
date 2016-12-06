@@ -4,9 +4,8 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_green"
     android:orientation="vertical"
-    tools:context="com.cjp.os_china.ui.Main.MainActivity">
+    tools:context="com.cjp.os_china.ui.main.MainActivity">
 
     <FrameLayout
         android:id="@+id/contains"
@@ -15,7 +14,7 @@
         android:layout_weight="1"></FrameLayout>
 
     <fragment
-        class="com.cjp.os_china.ui.Main.NavFragment"
+        class="com.cjp.os_china.ui.main.NavFragment"
         android:layout_width="match_parent"
         android:layout_height="48dp" />
 </LinearLayout>

@@ -1,4 +1,4 @@
-package com.cjp.os_china.ui.Main;
+package com.cjp.os_china.ui.main;
 
 import android.annotation.TargetApi;
 import android.content.Context;
