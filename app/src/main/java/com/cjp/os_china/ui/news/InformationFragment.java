@@ -1,8 +1,10 @@
 package com.cjp.os_china.ui.news;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cjp.os_china.R;
@@ -10,10 +12,17 @@ import com.cjp.os_china.base.BaseListFragment;
 import com.cjp.os_china.widget.pullrecycler.BaseViewHolder;
 import com.cjp.os_china.widget.pullrecycler.PullRecycler;
 
+import java.util.Arrays;
+
+import cn.bingoogolapple.bgabanner.BGABanner;
+
 /**
  * Created by panj on 2016/12/6.
  */
 public class InformationFragment extends BaseListFragment {
+
+    private static final String TAG = "InformationFragment";
+
     @Override
     protected void initViews(View view) {
         super.initViews(view);
@@ -74,13 +83,24 @@ public class InformationFragment extends BaseListFragment {
 
     class HeaderViewHolder extends BaseViewHolder {
 
-        TextView mTitleTv;
-        TextView mDesTv;
+        BGABanner mContentBanner;
 
         public HeaderViewHolder(View itemView) {
             super(itemView);
-            mDesTv = (TextView) itemView.findViewById(R.id.info_title_tv);
-            mTitleTv = (TextView) itemView.findViewById(R.id.des_tv);
+            mContentBanner = (BGABanner) itemView.findViewById(R.id.banner_guide_content);
+            mContentBanner.setAdapter(new BGABanner.Adapter() {
+                @Override
+                public void fillBannerItem(BGABanner banner, View view, Object model, int position) {
+                    ((ImageView)view).setImageResource((int)model);
+                }
+            });
+            mContentBanner.setData(Arrays.asList(R.drawable.tab_icon_tweet, R.drawable.tab_icon_tweet, R.drawable.tab_icon_tweet), null);
+            mContentBanner.setOnItemClickListener(new BGABanner.OnItemClickListener() {
+                @Override
+                public void onBannerItemClick(BGABanner banner, View view, Object model, int position) {
+                    Log.i(TAG, "点击了第" + (position + 1) + "页");
+                }
+            });
         }
 
         @Override
