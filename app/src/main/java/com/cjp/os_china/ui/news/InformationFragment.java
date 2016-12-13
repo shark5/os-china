@@ -6,15 +6,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cjp.os_china.R;
+import com.cjp.os_china.base.AppDefs;
 import com.cjp.os_china.base.BaseListFragment;
+import com.cjp.os_china.entity.BannerResult;
+import com.cjp.os_china.entity.BaseResult;
+import com.cjp.os_china.network.Api;
+import com.cjp.os_china.network.SubscriberOnNextListener;
 import com.cjp.os_china.widget.pullrecycler.BaseViewHolder;
 import com.cjp.os_china.widget.pullrecycler.PullRecycler;
 
 import java.util.Arrays;
 
 import cn.bingoogolapple.bgabanner.BGABanner;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by panj on 2016/12/6.
@@ -34,6 +43,12 @@ public class InformationFragment extends BaseListFragment {
     protected BaseViewHolder getViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.item_information_list, parent, false);
         return new InformationListViewHolder(view);
+    }
+
+    @Override
+    protected void initData() {
+        super.initData();
+        getBannerList();
     }
 
     @Override
@@ -57,6 +72,17 @@ public class InformationFragment extends BaseListFragment {
                 }
             }
         }, 3000);
+    }
+
+    private void getBannerList() {
+        SubscriberOnNextListener<BannerResult> listener = new SubscriberOnNextListener<BannerResult>() {
+            @Override
+            public void onNext(BannerResult result) {
+                Toast.makeText(getActivity(), "onNext", Toast.LENGTH_LONG).show();
+                BannerResult bannerResult = result;
+            }
+        };
+        Api.getInstance().getBannerList(listener, AppDefs.CATALOG_BANNER_NEWS, getActivity());
     }
 
     class InformationListViewHolder extends BaseViewHolder {
@@ -91,7 +117,7 @@ public class InformationFragment extends BaseListFragment {
             mContentBanner.setAdapter(new BGABanner.Adapter() {
                 @Override
                 public void fillBannerItem(BGABanner banner, View view, Object model, int position) {
-                    ((ImageView)view).setImageResource((int)model);
+                    ((ImageView) view).setImageResource((int) model);
                 }
             });
             mContentBanner.setData(Arrays.asList(R.drawable.tab_icon_tweet, R.drawable.tab_icon_tweet, R.drawable.tab_icon_tweet), null);
