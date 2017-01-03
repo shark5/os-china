@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.jiongbull.jlog.Logger;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -17,10 +19,12 @@ import butterknife.Unbinder;
 public abstract class BaseFragment extends Fragment {
 
     private Unbinder unbinder;
+    protected Logger mLogger;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mLogger = MyApplication.getLogger();
     }
 
     @Override

@@ -1,29 +1,20 @@
 package com.cjp.os_china.ui.news;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cjp.os_china.R;
-import com.cjp.os_china.base.AppDefs;
 import com.cjp.os_china.base.BaseListFragment;
 import com.cjp.os_china.entity.BannerResult;
-import com.cjp.os_china.entity.BaseResult;
-import com.cjp.os_china.network.Api;
-import com.cjp.os_china.network.SubscriberOnNextListener;
 import com.cjp.os_china.widget.pullrecycler.BaseViewHolder;
 import com.cjp.os_china.widget.pullrecycler.PullRecycler;
 
 import java.util.Arrays;
 
 import cn.bingoogolapple.bgabanner.BGABanner;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by panj on 2016/12/6.
@@ -82,7 +73,7 @@ public class InformationFragment extends BaseListFragment<InformationPresenterIm
 
     @Override
     public void setBannerList(BannerResult result) {
-        Log.e(TAG, result.toString());
+        mLogger.d(result.toString());
     }
 
     class InformationListViewHolder extends BaseViewHolder {
@@ -124,7 +115,7 @@ public class InformationFragment extends BaseListFragment<InformationPresenterIm
             mContentBanner.setOnItemClickListener(new BGABanner.OnItemClickListener() {
                 @Override
                 public void onBannerItemClick(BGABanner banner, View view, Object model, int position) {
-                    Log.i(TAG, "点击了第" + (position + 1) + "页");
+                    mLogger.d("点击了第" + (position + 1) + "页");
                 }
             });
         }

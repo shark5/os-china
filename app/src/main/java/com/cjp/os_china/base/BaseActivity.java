@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.cjp.os_china.event.IEventBus;
+import com.jiongbull.jlog.Logger;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -17,11 +18,13 @@ import butterknife.Unbinder;
 public abstract class BaseActivity extends AppCompatActivity {
 
     private Unbinder unbinder;
+    protected Logger mLogger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResId());
+        mLogger = MyApplication.getLogger();
         unbinder = ButterKnife.bind(this);
 
         if (this instanceof IEventBus) {
