@@ -28,7 +28,7 @@ import rx.schedulers.Schedulers;
 /**
  * Created by panj on 2016/12/6.
  */
-public class InformationFragment extends BaseListFragment {
+public class InformationFragment extends BaseListFragment<InformationPresenterImpl, InformationModel,String> implements InformationContract.View {
 
     private static final String TAG = "InformationFragment";
 
@@ -75,14 +75,14 @@ public class InformationFragment extends BaseListFragment {
     }
 
     private void getBannerList() {
-        SubscriberOnNextListener<BannerResult> listener = new SubscriberOnNextListener<BannerResult>() {
-            @Override
-            public void onNext(BannerResult result) {
-                Toast.makeText(getActivity(), "onNext", Toast.LENGTH_LONG).show();
-                BannerResult bannerResult = result;
-            }
-        };
-        Api.getInstance().getBannerList(listener, AppDefs.CATALOG_BANNER_NEWS, getActivity());
+        if (mPresenter != null) {
+            mPresenter.getBannerList();
+        }
+    }
+
+    @Override
+    public void setBannerList(BannerResult result) {
+        Log.e(TAG, result.toString());
     }
 
     class InformationListViewHolder extends BaseViewHolder {

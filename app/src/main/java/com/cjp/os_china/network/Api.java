@@ -18,6 +18,7 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
@@ -78,7 +79,7 @@ public class Api {
      *
      * @param <T> Subscriber真正需要的数据类型，也就是Data部分的数据类型
      */
-    private class HttpResultFunc<T> implements Func1<BaseResult<T>, T> {
+    public static class HttpResultFunc<T> implements Func1<BaseResult<T>, T> {
 
         @Override
         public T call(BaseResult<T> httpResult) {
@@ -90,17 +91,10 @@ public class Api {
     }
 
     //添加线程管理并订阅
-    private void toSubscribe(Observable o, Subscriber s){
-        o.subscribeOn(Schedulers.io())
+    public static Subscription toSubscribe(Observable o, Subscriber s){
+        return o.subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s);
-    }
-
-    public void getBannerList(SubscriberOnNextListener<BannerResult> listener, int catalog, Context context) {
-        Observable observable = apiService.getBannerList(catalog)
-                .map(new HttpResultFunc<BannerResult>());
-
-        toSubscribe(observable, new ProgressSubscriber<BannerResult>(listener, context));
     }
 }

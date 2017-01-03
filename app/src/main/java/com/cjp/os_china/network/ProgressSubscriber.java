@@ -3,6 +3,8 @@ package com.cjp.os_china.network;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.cjp.os_china.base.ApplicationDelegate;
+
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 
@@ -16,12 +18,12 @@ public class ProgressSubscriber<T> extends Subscriber<T> implements ProgressCanc
 
     private SubscriberOnNextListener mSubscriberOnNextListener;
     private ProgressDialogHandler mProgressDialogHandler;
-    private Context context;
+    private Context mContext;
 
-    public ProgressSubscriber(SubscriberOnNextListener mSubscriberOnNextListener, Context context) {
+    public ProgressSubscriber(SubscriberOnNextListener mSubscriberOnNextListener) {
         this.mSubscriberOnNextListener = mSubscriberOnNextListener;
-        this.context = context;
-        mProgressDialogHandler = new ProgressDialogHandler(context, this, true);
+        this.mContext = ApplicationDelegate.getInstance().getTopActivity();
+        mProgressDialogHandler = new ProgressDialogHandler(mContext, this, true);
     }
 
     @Override
@@ -38,11 +40,11 @@ public class ProgressSubscriber<T> extends Subscriber<T> implements ProgressCanc
     @Override
     public void onError(Throwable e) {
         if (e instanceof SocketTimeoutException) {
-            Toast.makeText(context, "网络中断，请检查您的网络状态", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "网络中断，请检查您的网络状态", Toast.LENGTH_SHORT).show();
         } else if (e instanceof ConnectException) {
-            Toast.makeText(context, "网络中断，请检查您的网络状态", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "网络中断，请检查您的网络状态", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(context, "error:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "error:" + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
         dismissProgressDialog();
     }

@@ -30,6 +30,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         initViews();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ApplicationDelegate.getInstance().setTopActivity(this);
+    }
 
     @Override
     protected void onDestroy() {

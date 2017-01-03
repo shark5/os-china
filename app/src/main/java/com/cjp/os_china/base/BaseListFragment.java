@@ -5,6 +5,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cjp.os_china.R;
+import com.cjp.os_china.base.mvp.BaseModel;
+import com.cjp.os_china.base.mvp.BasePresenter;
 import com.cjp.os_china.widget.pullrecycler.BaseListAdapter;
 import com.cjp.os_china.widget.pullrecycler.BaseViewHolder;
 import com.cjp.os_china.widget.pullrecycler.DividerItemDecoration;
@@ -18,7 +20,7 @@ import java.util.ArrayList;
  * Created by Stay on 8/3/16.
  * Powered by www.stay4it.com
  */
-public abstract class BaseListFragment<T> extends BaseFragment implements PullRecycler.OnRecyclerRefreshListener {
+public abstract class BaseListFragment<P extends BasePresenter, M extends BaseModel, T> extends BaseMvpFragment<P, M> implements PullRecycler.OnRecyclerRefreshListener {
     protected BaseListAdapter mAdapter;
     protected ArrayList<T> mDataList = new ArrayList<>();
     protected PullRecycler mPullRecycler;
