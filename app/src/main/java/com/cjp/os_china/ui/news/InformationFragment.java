@@ -6,28 +6,32 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.cjp.os_china.R;
 import com.cjp.os_china.base.BaseListFragment;
+import com.cjp.os_china.entity.Banner;
 import com.cjp.os_china.entity.BannerResult;
 import com.cjp.os_china.widget.pullrecycler.BaseViewHolder;
 import com.cjp.os_china.widget.pullrecycler.PullRecycler;
 
-import java.util.Arrays;
+import java.util.List;
 
 import cn.bingoogolapple.bgabanner.BGABanner;
 
 /**
  * Created by panj on 2016/12/6.
  */
-public class InformationFragment extends BaseListFragment<InformationPresenterImpl, InformationModel,String> implements InformationContract.View {
+public class InformationFragment extends BaseListFragment<InformationPresenterImpl, InformationModel, String> implements InformationContract.View {
 
     private static final String TAG = "InformationFragment";
+    private HeaderViewHolder mBannerHolder;
 
     @Override
     protected void initViews(View view) {
         super.initViews(view);
         View headerView = LayoutInflater.from(getActivity()).inflate(R.layout.item_information_list_header_view, null, false);
-        setHeaderView(new HeaderViewHolder(headerView));
+        mBannerHolder = new HeaderViewHolder(headerView);
+        setHeaderView(mBannerHolder);
     }
 
     @Override
@@ -74,6 +78,7 @@ public class InformationFragment extends BaseListFragment<InformationPresenterIm
     @Override
     public void setBannerList(BannerResult result) {
         mLogger.d(result.toString());
+        mBannerHolder.setItems(result.getItems());
     }
 
     class InformationListViewHolder extends BaseViewHolder {
@@ -101,6 +106,7 @@ public class InformationFragment extends BaseListFragment<InformationPresenterIm
     class HeaderViewHolder extends BaseViewHolder {
 
         BGABanner mContentBanner;
+        List<Banner> mItems;
 
         public HeaderViewHolder(View itemView) {
             super(itemView);
@@ -108,10 +114,13 @@ public class InformationFragment extends BaseListFragment<InformationPresenterIm
             mContentBanner.setAdapter(new BGABanner.Adapter() {
                 @Override
                 public void fillBannerItem(BGABanner banner, View view, Object model, int position) {
-                    ((ImageView) view).setImageResource((int) model);
+                    Banner item = (Banner) model;
+                    ImageView imageView = (ImageView) view.findViewById(R.id.news_iv);
+                    TextView titleTv = (TextView) view.findViewById(R.id.news_title_tv);
+                    titleTv.setText(item.getName());
+                    Glide.with(getActivity()).load(item.getImg()).into(imageView);
                 }
             });
-            mContentBanner.setData(Arrays.asList(R.drawable.tab_icon_tweet, R.drawable.tab_icon_tweet, R.drawable.tab_icon_tweet), null);
             mContentBanner.setOnItemClickListener(new BGABanner.OnItemClickListener() {
                 @Override
                 public void onBannerItemClick(BGABanner banner, View view, Object model, int position) {
@@ -126,6 +135,12 @@ public class InformationFragment extends BaseListFragment<InformationPresenterIm
 
         @Override
         public void onItemClick(View view, int position) {
+
+        }
+
+        public void setItems(List<Banner> items) {
+            this.mItems = items;
+            mContentBanner.setData(R.layout.item_news_banner, items, null);
 
         }
 
